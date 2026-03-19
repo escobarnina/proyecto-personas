@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <a href="{% url 'crear_persona' %}" class="btn">+ Nueva Persona</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre completo</th>
+                <th>Edad</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Ciudad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for persona in personas %}
+            <tr>
+                <td>{{ persona.id }}</td>
+                <td>{{ persona.nombre }} {{ persona.apellido }}</td>
+                <td>{{ persona.edad }}</td>
+                <td>{{ persona.email }}</td>
+                <td>{{ persona.telefono }}</td>
+                <td>{{ persona.ciudad }}</td>
+                <td>
+                    <a href="{% url 'editar_persona' persona.id %}" class="btn-secondary">Editar</a>
+                    <a href="{% url 'eliminar_persona' persona.id %}" class="btn-danger">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">No hay personas registradas.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
